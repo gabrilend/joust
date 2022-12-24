@@ -116,7 +116,8 @@ class Joust:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            self.stream_print(event_text, self.character_count) 
+            self.character_count = stream_print(event_text, \
+                                                self.character_count) 
 
     def generate_knight_name(self):
         prompt = "Write the name of a knight who is partaking in a joust.\n\n" + \

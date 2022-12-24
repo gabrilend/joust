@@ -1,4 +1,5 @@
 import openai
+from utilities import stream_print
 
 openai.api_key = "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"
 
@@ -41,7 +42,8 @@ class Town:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            self.stream_print(event_text)
+            self.character_count = stream_print(event_text, \
+                                                self.character_count)
         self.description = completion_text
         
         print("")
@@ -65,18 +67,7 @@ class Town:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            self.stream_print(event_text)
+            self.character_count = stream_print(event_text, \
+                                                self.character_count)
         return completion_text
-
-
-    def stream_print(self, text):
-        self.character_count += len(text)
-        if self.character_count >= 80:
-            if text[0] != " " and text[0] != "\n":
-                print("-\n-", end="", sep="", flush=True)
-            else:
-                print("\n", end="", sep="", flush=True)
-            self.character_count = len(text)
-        print(text, end="", sep="", flush=True)
-
 
