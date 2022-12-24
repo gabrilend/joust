@@ -1,5 +1,6 @@
 import openai
 import random
+from utilities import stream_print
 
 openai.api_key = "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"
 
@@ -85,7 +86,8 @@ class character:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            self.stream_print(event_text)
+            self.character_count = stream_print(event_text, \
+                                                self.character_count)
         self.description = completion_text
 
     def generate_name(self):
@@ -98,16 +100,6 @@ class character:
                                             max_tokens = 16, \
                                             temperature = 1)
         return response.choices[0].text.strip()
-
-    def stream_print(self, text):
-        self.character_count += len(text)
-        if self.character_count >= 80:
-            if text[0] != " " and text[0] != "\n":
-                print("-\n-", end="", sep="", flush=True)
-            else:
-                print("\n", end="", sep="", flush=True)
-            self.character_count = len(text)
-        print(text, end="", sep="", flush=True)
 
     def test_functionality(self):
         print("This is a test of the character generation functionality.")

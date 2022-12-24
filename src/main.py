@@ -114,9 +114,9 @@ def test_clock():
 
 
 
-#main()
+main()
 #test_character_status
 #test_melee()
 #test_town()
 #test_joust()
-test_clock()
+#test_clock()

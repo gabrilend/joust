@@ -1,5 +1,5 @@
 
-def stream_print(self, text, character_count):
+def stream_print(text, character_count):
     character_count += len(text)
     if character_count >= 80:
         if text[0] != " " and text[0] != "\n":
