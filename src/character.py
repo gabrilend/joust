@@ -1,13 +1,13 @@
 from TextGenerator import complete
+from TextGenerator import stream_print
 from Actor import Actor
-from utilities import stream_print
 import random
 
 class Character(Actor):
 
     def __init__(self, pronoun="he", possessive="his", active=None, passive="having an existential crisis", \
                  title="the character", description=None, name=None, character_class="commoner"):
-        Actor.__init__(self, name, description, title, pronoun, possessive, active, passive)
+        super().__init__(name, description, title, pronoun, possessive, active, passive)
         self.character_class = character_class
 
         health_roll = [1, 2, 3, 4]
@@ -79,7 +79,7 @@ class Character(Actor):
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            stream_print(event_text, 0)
+            stream_print(event_text)
         self.description = completion_text
 
     def generate_name(self):

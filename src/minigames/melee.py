@@ -1,9 +1,14 @@
-import openai
 import random
 
-openai.api_key = "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"
+import openai
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
+openai.api_key = config["OPENAI_API_KEY"]
+
 #engine_type = "text-ada-001"
 engine_type = "text-davinci-003"
+
 
 class Melee:
     
