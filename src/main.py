@@ -96,7 +96,7 @@ def describe_town(
         "\n[6] = Visit the Night Market" + \
         "\n[7] = Explore the Underbelly" + \
         "\n[8] = Visit the Palace" + \
-        "\n[9] = More..."_
+        "\n[9] = More..."
 
     print(actions)
 
