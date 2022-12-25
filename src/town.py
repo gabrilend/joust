@@ -3,7 +3,6 @@ from dotenv import dotenv_values
 
 from TextGenerator import stream_print
 from TextGenerator import complete
-from utilities import stream_print
 
 
 config = dotenv_values(".env")
@@ -13,7 +12,6 @@ openai.api_key = config["OPENAI_API_KEY"]
 class Town:
 
     def __init__(self, name, tournament=False, melee=False):
-        self.character_count = 0
 
         self.name = name
         self.tournament = tournament
@@ -40,14 +38,14 @@ class Town:
                             stream=True)
         collected_events = []
         completion_text = ''
-        self.character_count = 0
+        character_count = 0
 
         for event in response:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            self.character_count = stream_print(event_text, \
-                                                self.character_count)
+            character_count = stream_print(event_text, \
+                                                character_count)
         self.description = completion_text
         
         print("")
@@ -64,14 +62,13 @@ class Town:
                             stream=True)
         collected_events = []
         completion_text = ''
-        self.character_count = 0
+        character_count = 0
 
         for event in response:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            self.character_count = stream_print(event_text, \
-                                                self.character_count)
+            character_count = stream_print(event_text, character_count)
         return completion_text
         
     def generate_map(self):

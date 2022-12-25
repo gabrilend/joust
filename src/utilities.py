@@ -1,15 +1,4 @@
 
-def stream_print(text, character_count):
-    character_count += len(text)
-    if character_count >= 80:
-        if text[0] != " " and text[0] != "\n":
-            print("-\n-", end="", sep="", flush=True)
-        else:
-            print("\n", end="", sep="", flush=True)
-        character_count = len(text)
-    print(text, end="", sep="", flush=True)
-    return character_count
-
 class Clock:
     import time
 
