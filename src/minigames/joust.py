@@ -75,12 +75,26 @@ class Joust:
         return prompt
 
 
-    #this function returns a 1 if the player won, and a 0 if the computer won
     def get_joust_input(
         self,
         combatant_A_name="user",
         combatant_B_name="comp"
     ):
+        """
+        Selects a user provided jousting action from a list of accepted
+            actions
+
+        Args:
+            sef: self
+            combatant_A_name (str): User name
+            combatant_B_name (str): Computer name
+        Returns:
+            result (int): Boolean for win or loss
+            user_action (str): selected action (random for invalid input).
+            computer_action (str): computer action (random from remaining 
+                actions after user selection)
+
+        """
         possible_actions = ["high", "straight", "low"]
         user_action = input("Do you aim high, straight, or low?\n").lower()
 
@@ -104,19 +118,10 @@ class Joust:
         possible_actions.remove(user_action)
         computer_action = random.choice(possible_actions)
         
-        # Deprecated code? (commenting out so I don't remove something you 
-        # want to keep for some unforseen reason).
-        #
-        #if user_action:
-        #    pass
-        #else:
-        #    user_action = random.choice(possible_actions).capitalize()
-        
         # Rock, paper, scissors
         #   high > straight
         #   low > high
         #   straight > low
-
         if all([
             user_action == "high",
             computer_action == "straight",

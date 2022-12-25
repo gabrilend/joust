@@ -13,6 +13,8 @@ class Location:
         actors=[],
         adjacentPlaces=[]
     ):
+        #TODO: Not sure if self.<var> needs to be added as __init__ params if 
+        #   they aren't given anywhere. May need to fix this.
         self.name = name
         self.description = description
         self.actors = actors
@@ -42,12 +44,7 @@ class Location:
             return self.description
    
     def __generate_description(self):
-        # DRY!
         prompt = self.prompt
-        # prompt = f"Describe a {self.name} in a few sentences. Focus on " + \
-        #     "the details, and use romantic language. Think about how it " + \
-        #     "feels to be in that space and describe it as if seen for " + \
-        #     "the first time."
 
         if not self.actors:
             prompt += f"\n\nThere is nobody here."
@@ -67,12 +64,7 @@ class Location:
         return self.description
 
     def __generate_and_stream_description(self):
-        # DRY!
         prompt = self.prompt
-        # prompt = f"Describe a {self.name} in a few sentences. Focus on " + \
-        #     "the details, and use romantic language. Think about how it " + \
-        #     "feels to be in that space and describe it as if seen for " + \
-        #     "the first time."
 
         if len(self.actors) == 0:
             prompt += f"\n\nThere is nobody here."
