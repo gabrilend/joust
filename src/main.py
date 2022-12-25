@@ -7,7 +7,7 @@ from TextGenerator import stream_print
 
 
 def main():
-    character_name = input("Welcome to Argyle, please input your name\n")
+    character_name = input("Welcome to Argyle, please input your name.\n")
     town_name = "Sorenthal"
 
     if character_name:
@@ -24,9 +24,8 @@ def main():
     )
 
     while(True):
-        print(\
-            f"\nWelcome to {town_name}, {player_character.name}." + \
-            "You stand in the town square."
+        print(f"\nWelcome to {town_name}, {player_character.name}. " \
+            + "You stand in the town square." \
         )
 
         describe_town(
@@ -85,19 +84,17 @@ def describe_town(
 ):
     town.describe_town(player_name)
 
-    actions = \
-        "\n" + \
-        "\n=========== Actions =============" + \
-        "\n[0] = Describe Character" + \
-        "\n[1] = Visit the jousting tournament" + \
-        "\n[2] = Visit the grand melee" + \
-        "\n[3] = Visit the Tavern" + \
-        "\n[4] = Explore the forest" + \
-        "\n[5] = Visit the Mage Tower" + \
-        "\n[6] = Visit the Night Market" + \
-        "\n[7] = Explore the Underbelly" + \
-        "\n[8] = Visit the Palace" + \
-        "\n[9] = More..."
+    actions = "\n\n=========== Actions =============" \
+        + "\n[0] = Describe Character" \
+        + "\n[1] = Visit the jousting tournament" \
+        + "\n[2] = Visit the grand melee" \
+        + "\n[3] = Visit the Tavern" \
+        + "\n[4] = Explore the forest" \
+        + "\n[5] = Visit the Mage Tower" \
+        + "\n[6] = Visit the Night Market" \
+        + "\n[7] = Explore the Underbelly" \
+        + "\n[8] = Visit the Palace" \
+        + "\n[9] = More..."
 
     print(actions)
 

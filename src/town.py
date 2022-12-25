@@ -11,7 +11,12 @@ openai.api_key = config["OPENAI_API_KEY"]
 
 class Town:
 
-    def __init__(self, name, tournament=False, melee=False):
+    def __init__(
+        self,
+        name,
+        tournament=False,
+        melee=False
+    ):
 
         self.name = name
         self.tournament = tournament
@@ -30,12 +35,15 @@ class Town:
     def generate_and_stream_description(self):
         
         prompt = "Describe the town square of a medieval city named " + \
-                 self.name + "\n"
+            f"{self.name}.\n"
 
-        response = complete(prompt=prompt, \
-                            max_tokens=512, \
-                            temperature=1, \
-                            stream=True)
+        response = complete(
+            prompt=prompt,
+            max_tokens=512,
+            temperature=1,
+            stream=True,
+        )
+
         collected_events = []
         completion_text = ''
         character_count = 0
@@ -44,22 +52,26 @@ class Town:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            character_count = stream_print(event_text, \
-                                                character_count)
+
+            character_count = stream_print(
+                event_text,
+                character_count,
+            )
+
         self.description = completion_text
         
         print("")
-        prompt += self.description
+        prompt = f"{self.description}\nThere is a jousting tournament in " \
+            + "town today. Describe the exciting atmosphere and the " \
+            + "excited faces of the festival goers.\n\n"
 
-        prompt += "\n"
-        prompt += "There is a jousting tournament in town today. Describe the "
-        prompt += "exciting atmosphere and the exciting faces of the festival"
-        prompt += " goers.\n\n"
+        response = complete(
+            prompt=prompt,
+            max_tokens = 256,
+            temperature = 1,
+            stream=True,
+        )
 
-        response = complete(prompt=prompt, \
-                            max_tokens = 256, \
-                            temperature = 1, \
-                            stream=True)
         collected_events = []
         completion_text = ''
         character_count = 0
@@ -69,6 +81,7 @@ class Town:
             event_text = event['choices'][0]['text']
             completion_text += event_text
             character_count = stream_print(event_text, character_count)
+
         return completion_text
         
     def generate_map(self):
