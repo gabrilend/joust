@@ -1,8 +1,13 @@
-import openai
 import random
+
+import openai
+from dotenv import dotenv_values
+
 from utilities import stream_print
 
-openai.api_key = "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"
+config = dotenv_values(".env")
+openai.api_key = config["OPENAI_API_KEY"]
+
 
 class character:
 

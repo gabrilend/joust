@@ -1,6 +1,20 @@
 import random
+
+import openai
+from dotenv import dotenv_values
+
+from utilities import stream_print
 from TextGenerator import complete
 from TextGenerator import stream_print
+
+
+config = dotenv_values(".env")
+openai.api_key = config["OPENAI_API_KEY"]
+
+#engine_type = "text-ada-001"
+engine_type = "text-davinci-003"
+
+
 class Joust:
 
     def __init__(self, combatant_A_name="", combatant_B_name=""):
