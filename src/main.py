@@ -1,7 +1,7 @@
 import minigames.joust as joust
 import minigames.melee as melee
 from town import Town
-from character import character
+from Character import Character
 from TextGenerator import stream_print
 
 
@@ -11,11 +11,11 @@ def main():
 
     if character_name:
         print("Thank you.") 
-        player_character = character(name=character_name)
+        player_character = Character(name=character_name)
     else:
         print("No name specified. Generating random character...\n")
-        player_character = character()
-
+        player_character = Character()
+    
     my_town = generate_town(
         town_name,
         tournament=True,
@@ -107,7 +107,7 @@ def test_character_status(
 ):
     print("Now engaging character status test. Please stand by.\n")
     print("================== generating character ======================")
-    test_character = character(
+    test_character = Character(
         name,
         character_class,
         description

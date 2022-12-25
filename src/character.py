@@ -1,32 +1,23 @@
+from TextGenerator import complete
+from TextGenerator import stream_print
+from Actor import Actor
 import random
 
-import openai
-from dotenv import dotenv_values
+class Character(Actor):
 
-from utilities import stream_print
-
-config = dotenv_values(".env")
-openai.api_key = config["OPENAI_API_KEY"]
-
-
-class character:
-
-    def __init__(self, name="", character_class="commoner", description=""):
-        #self.engine_type = "text-ada-001"
-        self.engine_type = "text-davinci-003"
-        self.name = name
+    def __init__(self, pronoun="he", possessive="his", active=None, passive="having an existential crisis", \
+                 title="the character", description=None, name=None, character_class="commoner"):
+        super().__init__(name, description, title, pronoun, possessive, active, passive)
         self.character_class = character_class
-        self.description = description
-        self.character_count = 0
 
         health_roll = [1, 2, 3, 4]
         ac_roll = [13, 14, 15, 16, 17, 18]
 
-        if self.name == "":
+        if self.name == None:
             self.name = self.generate_name()
         else:
             self.name = name
-        if self.description == "":
+        if self.description == None:
             self.generate_and_stream_description()
         else:
             self.description = description
@@ -39,7 +30,7 @@ class character:
 
     def generate_status(self):
 
-        prompt = "Describe a person's with these characteristics in +" \
+        prompt = "Describe a person with these characteristics in +" \
                  "one sentence. Focus on their health and wellbeing.\n"
 
         if self.description == "":
@@ -66,10 +57,9 @@ class character:
         prompt += f"In terms of their health, in this moment " + \
                    "they are feeling {status}\n"
 
-        response = openai.Completion.create(engine=self.engine_type, \
-                                            prompt=prompt, \
-                                            max_tokens = 256, \
-                                            temperature = 0.3)
+        response = complete(prompt=prompt, \
+                            max_tokens = 256, \
+                            temperature = 0.3)
         self.status = response.choices[0].text.strip()
         return self.status
 
@@ -78,21 +68,19 @@ class character:
         prompt = f"Describe a medieval person"
         prompt += f" named {self.name} living in the year 1453.\n\n"
 
-        response = openai.Completion.create(engine=self.engine_type, \
-                                            prompt=prompt, \
-                                            max_tokens = 256, \
-                                            temperature = 1, \
-                                            stream=True)
+        response = complete(prompt=prompt, \
+                            max_tokens = 256, \
+                            temperature = 1, \
+                            stream=True)
         collected_events = []
         completion_text = ""
-        self.character_count = 0
+        character_count = 0
 
         for event in response:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            self.character_count = stream_print(event_text, \
-                                                self.character_count)
+            stream_print(event_text, character_count)
         self.description = completion_text
 
     def generate_name(self):
@@ -100,10 +88,9 @@ class character:
         prompt = "Write the name of a medieval person who is travelling through \
                   town. They are a " + self.character_class + "."
 
-        response = openai.Completion.create(engine=self.engine_type, \
-                                            prompt=prompt, \
-                                            max_tokens = 16, \
-                                            temperature = 1)
+        response = complete(prompt=prompt, \
+                            max_tokens = 16, \
+                            temperature = 1)
         return response.choices[0].text.strip()
 
     def test_functionality(self):
