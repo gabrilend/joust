@@ -2,8 +2,8 @@ from TextGenerator import complete
 
 class Actor:
 
-    def __init__(self, name, description, title, active=None, \
-                 passive="having an existential crisis", pronoun, possessive):
+    def __init__(self, name, description, title, pronoun, possessive, \
+                 active=None, passive="having an existential crisis"):
         self.name = name
         self.description = description
         self.title = title
