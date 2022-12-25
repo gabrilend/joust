@@ -1,6 +1,7 @@
 import openai
 import random
-from utilities import stream_print
+from TextGenerator import complete
+from TextGenerator import stream_print
 
 openai.api_key = "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"
 #engine_type = "text-ada-001"
@@ -103,11 +104,10 @@ class Joust:
 
 
     def generate_joust(self, prompt):
-        response = openai.Completion.create(engine=engine_type, \
-                                            prompt=prompt, \
-                                            max_tokens = 512, \
-                                            temperature = 1, \
-                                            stream=True)
+        response = complete(prompt=prompt, \
+                            max_tokens = 512, \
+                            temperature = 1, \
+                            stream=True)
         collected_events = []
         completion_text = ''
         self.character_count = 0
@@ -125,8 +125,7 @@ class Joust:
                  "Sir Arthilon, the blue and gold knight of Papilae\n" + \
                  "Ser Bureaugard, the Brave\n" + \
                  "Oxelot of the Golden Forest\n"
-        response = openai.Completion.create(engine=engine_type, \
-                                            prompt=prompt, \
-                                            max_tokens = 16, \
-                                            temperature = 1)
+        response = complete(prompt=prompt, \
+                            max_tokens = 16, \
+                            temperature = 1)
         return response.choices[0].text.strip()

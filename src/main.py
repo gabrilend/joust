@@ -2,7 +2,7 @@ import minigames.joust as joust
 import minigames.melee as melee
 from town import Town
 from character import character
-from utilities import stream_print
+from TextGenerator import stream_print
 
 def main():
     print("Welcome to Argyle, please input your name")

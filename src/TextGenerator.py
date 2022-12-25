@@ -1,4 +1,25 @@
 import openai
 
-def complete(self, engine_type="text-davinci-003", prompt, max_tokens, stream=False):
-    return openai.Completion.create(self.engine_type, prompt, max_tokens, stream)
+def complete(engine_type="text-davinci-003", \
+             prompt="", \
+             max_tokens=128, \
+             temperature=0.7, \
+             stream=False):
+
+    return openai.Completion.create(engine=engine_type, \
+                                    prompt=prompt, \
+                                    max_tokens=max_tokens, \
+                                    temperature=temperature, \
+                                    stream=stream)
+
+def stream_print(text, character_count):
+    character_count += len(text)
+    if character_count >= 80:
+        if text[0] != " " and text[0] != "\n":
+            print("-\n-", end="", sep="", flush=True)
+        else:
+            print("\n", end="", sep="", flush=True)
+        character_count = len(text)
+    print(text, end="", sep="", flush=True)
+    return character_count
+

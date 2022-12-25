@@ -1,13 +1,12 @@
 import openai
-from utilities import stream_print
+from TextGenerator import stream_print
+from TextGenerator import complete
 
 openai.api_key = "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"
 
 class Town:
 
     def __init__(self, name, tournament=False, melee=False):
-        #self.engine_type = "text-ada-001"
-        self.engine_type = "text-davinci-003"
         self.character_count = 0
 
         self.name = name
@@ -29,11 +28,10 @@ class Town:
         prompt = "Describe the town square of a medieval city named " + \
                  self.name + "\n"
 
-        response = openai.Completion.create(engine=self.engine_type, \
-                                            prompt=prompt, \
-                                            max_tokens = 512, \
-                                            temperature = 1, \
-                                            stream=True)
+        response = complete(prompt=prompt, \
+                            max_tokens=512, \
+                            temperature=1, \
+                            stream=True)
         collected_events = []
         completion_text = ''
         self.character_count = 0
@@ -54,11 +52,10 @@ class Town:
         prompt += "exciting atmosphere and the exciting faces of the festival"
         prompt += " goers.\n\n"
 
-        response = openai.Completion.create(engine=self.engine_type, \
-                                        prompt=prompt, \
-                                        max_tokens = 256, \
-                                        temperature = 1, \
-                                        stream=True)
+        response = complete(prompt=prompt, \
+                            max_tokens = 256, \
+                            temperature = 1, \
+                            stream=True)
         collected_events = []
         completion_text = ''
         self.character_count = 0
