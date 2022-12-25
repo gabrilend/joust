@@ -16,8 +16,8 @@ def complete(engine_type="text-davinci-003", \
                                     temperature=temperature, \
                                     stream=stream)
 
-def stream_print(text):
-    character_count = len(text)
+def stream_print(text, character_count):
+    character_count += len(text)
     if character_count >= 80:
         if text[0] != " " and text[0] != "\n":
             print("-\n-", end="", sep="", flush=True)

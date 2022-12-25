@@ -74,12 +74,13 @@ class Character(Actor):
                             stream=True)
         collected_events = []
         completion_text = ""
+        character_count = 0
 
         for event in response:
             collected_events.append(event)
             event_text = event['choices'][0]['text']
             completion_text += event_text
-            stream_print(event_text)
+            stream_print(event_text, character_count)
         self.description = completion_text
 
     def generate_name(self):
