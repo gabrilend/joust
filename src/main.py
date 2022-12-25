@@ -2,6 +2,7 @@ import minigames.joust as joust
 import minigames.melee as melee
 from town import Town
 from character import character
+from Location import Location
 from TextGenerator import stream_print
 
 def main():
@@ -111,10 +112,16 @@ def test_clock():
     while(True):
         break
 
+def test_location():
+    print("This is a test of the location functionality.")
+    print("Please stand by as a location is generated and streamed.")
+    my_loc = Location()
+    my_loc.describe()
 
 
 
 main()
+#test_location()
 #test_character_status
 #test_melee()
 #test_town()
