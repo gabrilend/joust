@@ -15,24 +15,21 @@ class Melee:
     def __init__(
         self,
         town="",
-        reward="",
-        description=""
+        reward=None,
+        description=None,
     ):
-        if reward == "":
-            possible_rewards=[
-                random.randint(500, 1500),
-                random.randint(500, 1500),
-                random.randint(500, 1500),
-                random.randint(500, 1500),
-                0,
-            ]
-            self.reward = random.choice(possible_rewards)
-
+        if not reward:
+            if random.choice(range(5)) > 0
+                self.reward = random.randint(500,1500)
+            else:
+                self.reward = 0 
+  
         self.description = description
 
-        if self.description == "":
+        if not self.description:
             self.description = "There isn't a duel happening now."
-
+        
+        #TODO: Default if not name?
         self.town = town
 
     def __str__(self):
@@ -65,7 +62,6 @@ class Melee:
         
         while(True):
             self.user_input = self.generate_die_rolls()
-
 
             if self.roll_to_hit(self.user_input[0], B.ac):
                 self.resolve_damage(self.user_input[1], B)
@@ -108,10 +104,9 @@ class Melee:
 
     def __setup_melee(self, A, B):
         #FIXME - add some description of the melee
-        print(\
-            "The melee is grand and honorable. Who will succeed on this day?" \
+        print("The melee is grand and honorable. Who will succeed on this " \
+            + "day?" \
         )
-
 
     def generate_die_rolls(self):
         attack_roll = []
@@ -178,11 +173,12 @@ class Melee:
         return (a_prompt, b_prompt)
 
     def end_melee(self, A_health, B_health):
-        print(\
-            "The melee is finished. Both combatants bow their heads and " \
+        print("The melee is finished. Both combatants bow their heads and " \
             + "relinquish the thrill of valor." \
         )
-
+        
+        #TODO: Standardize win determination code/function naming with joust?
+        #   (joust uses boolean integers where here a string is provided)
         if A_health > B_health:
             return "a"
         elif B_health > A_health:
