@@ -2,8 +2,16 @@ from TextGenerator import complete
 
 class Actor:
 
-    def __init__(self, name, description, title, pronoun, possessive, \
-                 active=None, passive="having an existential crisis"):
+    def __init__(
+        self,
+        name,
+        description,
+        title,
+        pronoun,
+        possessive,
+        active=None,
+        passive="having an existential crisis"
+    ):
         self.name = name
         self.description = description
         self.title = title
@@ -16,9 +24,11 @@ class Actor:
         self.active = active
 
     def describe(self):
-        return complete(prompt=description,
-                        max_tokens=256,
-                        temperature=1)
+        return complete(
+            prompt=description,
+            max_tokens=256,
+            temperature=1
+        )
 
     def describeActivity(self):
         if active != None:
@@ -27,7 +37,13 @@ class Actor:
         else:
             activity = passive
             adverb = "idly "
-        return complete(prompt="Write a description of " + self.name + " " + \
-                        self.title + " " + adverb + activity + ".",
-                        max_tokens=256,
-                        temperature=1)
+        
+        prompt = f"Write a description of {self.name} " \
+            + f"{self.title} {adverb} {activity}."
+
+        return complete(
+            prompt=prompt,
+            max_tokens=256,
+            temperature=1
+        )
+
