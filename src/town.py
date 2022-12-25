@@ -1,8 +1,5 @@
-import openai
 from TextGenerator import stream_print
 from TextGenerator import complete
-
-openai.api_key = "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"
 
 class Town:
 
@@ -67,4 +64,7 @@ class Town:
             self.character_count = stream_print(event_text, \
                                                 self.character_count)
         return completion_text
+        
+    def generate_map(self):
+        pass
 

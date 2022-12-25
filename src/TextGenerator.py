@@ -1,5 +1,7 @@
 import openai
 
+openai.api_key = "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"
+
 def complete(engine_type="text-davinci-003", \
              prompt="", \
              max_tokens=128, \
@@ -20,6 +22,9 @@ def stream_print(text, character_count):
         else:
             print("\n", end="", sep="", flush=True)
         character_count = len(text)
+    else:
+        if "\n" in text:
+            character_count = len(text)
     print(text, end="", sep="", flush=True)
     return character_count
 

@@ -1,12 +1,6 @@
-import openai
 import random
 from TextGenerator import complete
 from TextGenerator import stream_print
-
-openai.api_key = "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"
-#engine_type = "text-ada-001"
-engine_type = "text-davinci-003"
-
 class Joust:
 
     def __init__(self, combatant_A_name="", combatant_B_name=""):
